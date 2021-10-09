@@ -66,3 +66,8 @@ Nasledujúci diagram zachytáva tok dát medzi kľučovými komponentami, opísa
 Nasledujúca tabuľka ilustruje ukážku vyextrahovaných dát z CRZ.
 ![Ukážka datasetu](dataset_preview.png)
 
+## Vyhodnotenie
+Na vyhodnotenie úspešnosti riešenia použijem metriky Precision a Recall, vypočítané nad testovacím datasetom.
+Metrika Precision určí, koľko z identifikovaných vzťahov naozaj existuje.
+Metrika Recall určí, koľko existujúcich vzťahov bolo identifikovaných.
+
