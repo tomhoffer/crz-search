@@ -3,7 +3,7 @@ import hashlib
 import scrapy
 
 from crawler.contract_parser import parse_price, parse_date, parse_contract_party, parse_string
-from crawler.helpers import hash_url, remove_url_trailing_slash
+from crawler.helpers import hash_url, remove_url_trailing_slash, generate_start_urls
 
 NEXT_PAGE_SELECTOR = '.pagination-next'
 CONTRACT_DETAIL_SELECTOR = 'td > a'
@@ -29,7 +29,8 @@ CONTRACT_DETAIL = {
 class ContractSpider(scrapy.Spider):
     name = 'crzp'
 
-    start_urls = ['https://www.crz.gov.sk/2171273-sk/centralny-register-zmluv/?art_datum_zverejnene_od=01.01.2021&page=0']
+    start_urls = generate_start_urls()
+
     custom_settings = {
         'CONCURRENT_REQUESTS': 1,
         'DEFAULT_REQUEST_HEADERS': {
@@ -39,7 +40,7 @@ class ContractSpider(scrapy.Spider):
             'Purpose': 'FIIT STU Bratislava, project for academic purposes',
         },
         # Wait N seconds before each request to respect rate limits
-        'DOWNLOAD_DELAY': 3,
+        'DOWNLOAD_DELAY': 2.5,
 
         # Use BFS instead of default DFS
         'DEPTH_PRIORITY': 1,

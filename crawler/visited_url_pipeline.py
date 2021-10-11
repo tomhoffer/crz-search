@@ -31,7 +31,6 @@ class VisitedUrlPipeline:
 
     def _mark_url_as_visited(self, url: str):
         url_hash = hash_url(url)
-        print("Hashujem ", url, "na", url_hash)
         self.spider.visited[url_hash] = True
 
     def _write_visited_urls(self):
