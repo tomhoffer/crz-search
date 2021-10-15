@@ -24,7 +24,7 @@ def parse_contract_party(text: List[str]) -> Tuple[Optional[str], Optional[str]]
 
 def parse_price(text: str) -> Optional[float]:
     try:
-        res = re.search(r'\d*[.,]?\d*', text).group(0).replace(',', '.')
+        res = re.search(r'\d*\s?\d*[.,]?\d*', text).group(0).replace(',', '.').replace(' ', '')
         return float(res)
     except (AttributeError, ValueError):  # Regex not matched
         return None

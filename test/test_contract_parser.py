@@ -35,6 +35,7 @@ class TestContractParser:
             '170.0': 170.0,
             '170,0': 170.0,
             '170': 170.0,
+            '7 178,17 €': 7178.17,
             'neznámy': None,
             '': None,
         }
