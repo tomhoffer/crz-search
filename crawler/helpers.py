@@ -1,4 +1,5 @@
 import hashlib
+from random import shuffle
 
 
 def hash_url(url: str):
@@ -20,4 +21,5 @@ def generate_start_urls():
             except IndexError:
                 start_urls.append("https://www.crz.gov.sk/2171273-sk/centralny-register-zmluv/?art_datum_zverejnene_od=01.{}.{}&art_datum_zverejnene_do=01.{}.{}&page=0".format(months[i], y, months[i], y))
 
+    shuffle(start_urls)
     return start_urls
