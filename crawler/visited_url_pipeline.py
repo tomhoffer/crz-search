@@ -19,6 +19,7 @@ class VisitedUrlPipeline:
 
     def process_item(self, item, spider):
         self._mark_url_as_visited(item['url'])
+        print("Total visited: ", len(self.spider.visited))
         return item
 
     def _load_visited_urls(self):
