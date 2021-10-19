@@ -32,7 +32,7 @@ class ContractSpider(scrapy.Spider):
     start_urls = generate_start_urls()
 
     custom_settings = {
-        'CONCURRENT_REQUESTS': 2,
+        'CONCURRENT_REQUESTS': 3,
         'DEFAULT_REQUEST_HEADERS': {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'en',
@@ -40,7 +40,7 @@ class ContractSpider(scrapy.Spider):
             'Purpose': 'FIIT STU Bratislava, project for academic purposes',
         },
         # Wait N seconds before each request to respect rate limits
-        'DOWNLOAD_DELAY': 2,
+        'DOWNLOAD_DELAY': 1.5,
 
         # Use BFS instead of default DFS
         'DEPTH_PRIORITY': 1,
