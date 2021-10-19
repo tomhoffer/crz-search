@@ -11,4 +11,8 @@ lines['supplier'] = lines['supplier'].str.strip()
 lines['customer_address'] = lines['customer_address'].str.strip()
 lines['supplier_address'] = lines['supplier_address'].str.strip()
 
+# Unify name capitalization
+lines['customer'] = lines['customer'].str.upper()
+lines['supplier'] = lines['supplier'].str.upper()
+
 lines.to_csv('output.csv')

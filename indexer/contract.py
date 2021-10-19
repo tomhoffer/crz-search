@@ -1,3 +1,7 @@
+import sys
+from typing import Literal, Optional
+
+
 class Contract:
     url: str
     id: str
@@ -33,3 +37,14 @@ class Contract:
         self.conclusion_date = obj['conclusion_date']
         self.effective_date = obj['effective_date']
         self.expiration_date = obj['expiration_date']
+
+
+class Vertex:
+    target: str  # E.g. supplier name, address value,...
+    type: Literal['address', 'contract', 'start']
+    contract: Optional[Contract]
+
+    def __init__(self, target: str, type: Literal['address', 'contract', 'start'], contract: Optional[Contract]):
+        self.target = target
+        self.type = type
+        self.contract = contract
