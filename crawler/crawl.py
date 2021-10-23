@@ -1,9 +1,7 @@
-import hashlib
-
 import scrapy
 
-from crawler.contract_parser import parse_price, parse_date, parse_contract_party, parse_string
-from crawler.helpers import hash_url, remove_url_trailing_slash, generate_start_urls
+from crawler.helpers import hash_url, generate_start_urls
+from parser.contract_parser import ContractParser
 
 NEXT_PAGE_SELECTOR = '.pagination-next'
 CONTRACT_DETAIL_SELECTOR = 'td > a'
@@ -14,7 +12,7 @@ CONTRACT_DETAIL = {
     'resort_selector': 'table th:contains("Rezort") + td',
     'customer_selector': 'table th:contains("Objednávateľ") + td',
     'supplier_selector': 'table th:contains("Dodávateľ") + td',
-    #'supplier_id_selector': 'table th:contains("Dodávateľ") + td',
+    # 'supplier_id_selector': 'table th:contains("Dodávateľ") + td',
     'name_selector': 'table th:contains("Názov zmluvy") + td strong',
     'id_selector': 'table th:contains("ID zmluvy") + td strong',
     'note_selector': 'table th:contains("Poznámka") + td',
@@ -56,6 +54,7 @@ class ContractSpider(scrapy.Spider):
 
     def __init__(self):
         self.visited = {}  # MD5 hashes of already visited URLs
+        self.parser = ContractParser()
 
     def parse(self, response):
 
@@ -77,34 +76,34 @@ class ContractSpider(scrapy.Spider):
         def extract_with_css(query: str):
             return response.css(query).get()
 
-        supplier_name, supplier_address = parse_contract_party(
+        supplier_name, supplier_address = self.parser.parse_contract_party(
             response.css(CONTRACT_DETAIL['supplier_selector'] + '::text').getall())
-        customer_name, customer_address = parse_contract_party(
+        customer_name, customer_address = self.parser.parse_contract_party(
             response.css(CONTRACT_DETAIL['customer_selector'] + '::text').getall())
 
         if response.status == 200:
             yield {
                 'url': response.url,
-                'id': parse_string(extract_with_css(CONTRACT_DETAIL['id_selector'] + '::text')),
-                'type': parse_string(extract_with_css(CONTRACT_DETAIL['type_selector'] + '::text')),
-                'number': parse_string(extract_with_css(CONTRACT_DETAIL['number_selector'] + '::text')),
-                'resort': parse_string(extract_with_css(CONTRACT_DETAIL['resort_selector'] + '::text')),
+                'id': self.parser.parse_string(extract_with_css(CONTRACT_DETAIL['id_selector'] + '::text')),
+                'type': self.parser.parse_string(extract_with_css(CONTRACT_DETAIL['type_selector'] + '::text')),
+                'number': self.parser.parse_string(extract_with_css(CONTRACT_DETAIL['number_selector'] + '::text')),
+                'resort': self.parser.parse_string(extract_with_css(CONTRACT_DETAIL['resort_selector'] + '::text')),
                 'customer': customer_name,
                 'customer_address': customer_address,
                 'supplier': supplier_name,
                 'supplier_address': supplier_address,
-                #'contract_supplier_id': parse_string(
+                # 'contract_supplier_id': parse_string(
                 #    extract_with_css(CONTRACT_DETAIL['supplier_id_selector'] + '::text')),
-                'name': parse_string(extract_with_css(CONTRACT_DETAIL['name_selector'] + '::text')),
-                'note': parse_string(extract_with_css(CONTRACT_DETAIL['note_selector'] + '::text')),
-                'final_price_eur': parse_price(
+                'name': self.parser.parse_string(extract_with_css(CONTRACT_DETAIL['name_selector'] + '::text')),
+                'note': self.parser.parse_string(extract_with_css(CONTRACT_DETAIL['note_selector'] + '::text')),
+                'final_price_eur': self.parser.parse_price(
                     extract_with_css(CONTRACT_DETAIL['final_price_eur_selector'] + '::text')),
-                'publication_date': parse_date(
+                'publication_date': self.parser.parse_date(
                     extract_with_css(CONTRACT_DETAIL['publication_date_selector'] + '::text')),
-                'conclusion_date': parse_date(
+                'conclusion_date': self.parser.parse_date(
                     extract_with_css(CONTRACT_DETAIL['conclusion_date_selector'] + '::text')),
-                'effective_date': parse_date(
+                'effective_date': self.parser.parse_date(
                     extract_with_css(CONTRACT_DETAIL['effective_date_selector'] + '::text')),
-                'expiration_date': parse_date(
+                'expiration_date': self.parser.parse_date(
                     extract_with_css(CONTRACT_DETAIL['expiration_date_selector'] + '::text')),
             }
