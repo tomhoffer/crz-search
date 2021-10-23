@@ -1,6 +1,6 @@
 import pytest as pytest
 
-from indexer.contract import Vertex
+from indexer.model import Vertex
 from indexer.helpers import json_encode
 from indexer.indexer import EntityGraph
 

@@ -1,4 +1,5 @@
-import sys
+from dataclasses import dataclass
+from enum import Enum
 from typing import Literal, Optional
 
 
@@ -39,12 +40,32 @@ class Contract:
         self.expiration_date = obj['expiration_date']
 
 
+class VertexType(Enum):
+    street = 'street'
+    city = 'city'
+    zip = 'zip'
+    contract = 'contract'
+    start = 'start'
+
+
 class Vertex:
     target: str  # E.g. supplier name, address value,...
-    type: Literal['address', 'contract', 'start']
+    type: VertexType
     contract: Optional[Contract]
 
-    def __init__(self, target: str, type: Literal['address', 'contract', 'start'], contract: Optional[Contract]):
+    def __init__(self, target: str, type: VertexType, contract: Optional[Contract]):
         self.target = target
         self.type = type
         self.contract = contract
+
+
+@dataclass
+class Address:
+    city: str  # City or village name
+    street: str
+    zip: str
+
+    def __init__(self, zip: Optional[str] = None, city: Optional[str] = None, street: Optional[str] = None):
+        self.city = city
+        self.street = street
+        self.zip = zip
