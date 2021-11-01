@@ -1,16 +1,16 @@
 import pytest as pytest
 
-from indexer.model import Vertex
+from indexer.model import Edge
 from indexer.helpers import json_encode
 from indexer.indexer import EntityGraph
 
 
 def vertex(v: str):
-    return Vertex(v, type='contract', contract=None)
+    return Edge(v, type='contract', contract=None)
 
 
 def start_vertex(v: str):
-    return Vertex(v, type='start', contract=None)
+    return Edge(v, type='start', contract=None)
 
 
 class TestDfs:

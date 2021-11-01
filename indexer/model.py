@@ -40,7 +40,7 @@ class Contract:
         self.expiration_date = obj['expiration_date']
 
 
-class VertexType(Enum):
+class EdgeType(Enum):
     street = 'street'
     city = 'city'
     zip = 'zip'
@@ -48,12 +48,12 @@ class VertexType(Enum):
     start = 'start'
 
 
-class Vertex:
+class Edge:
     target: str  # E.g. supplier name, address value,...
-    type: VertexType
+    type: EdgeType
     contract: Optional[Contract]
 
-    def __init__(self, target: str, type: VertexType, contract: Optional[Contract]):
+    def __init__(self, target: str, type: EdgeType, contract: Optional[Contract]):
         self.target = target
         self.type = type
         self.contract = contract
