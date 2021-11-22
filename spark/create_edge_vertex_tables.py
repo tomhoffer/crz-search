@@ -61,12 +61,12 @@ def write_address(address: str, entity: Vertex, contract: Contract, parser: Cont
         write_edge(e_street_entity, edge_writer)
         vertex_writer.writerow([street_vertex.id])
 
-    if zip_vertex.id:
-        e_entity_zip = Edge(src=entity.id, dst=zip_vertex.id, type=EdgeType.zip.value, contract=contract)
-        e_zip_entity = Edge(src=zip_vertex.id, dst=entity.id, type=EdgeType.zip.value, contract=contract)
-        write_edge(e_entity_zip, edge_writer)
-        write_edge(e_zip_entity, edge_writer)
-        vertex_writer.writerow([zip_vertex.id])
+    #if zip_vertex.id:
+    #    e_entity_zip = Edge(src=entity.id, dst=zip_vertex.id, type=EdgeType.zip.value, contract=contract)
+    #    e_zip_entity = Edge(src=zip_vertex.id, dst=entity.id, type=EdgeType.zip.value, contract=contract)
+    #    write_edge(e_entity_zip, edge_writer)
+    #    write_edge(e_zip_entity, edge_writer)
+    #    vertex_writer.writerow([zip_vertex.id])
 
 
 def add_to_graph(row: Dict, parser: ContractParser):
