@@ -5,6 +5,9 @@ lines = pd.read_json('output.jl', lines=True)
 # Drop duplicate items (just in case)
 lines = lines.drop_duplicates(subset='url')
 
+# Replace newlines with spaces
+lines = lines.replace(r'\r+|\n+|\t+', ' ', regex=True)
+
 # Remove trailing spaces
 lines['customer'] = lines['customer'].str.strip()
 lines['supplier'] = lines['supplier'].str.strip()
