@@ -1,4 +1,4 @@
-from indexer.indexer import EntityGraph
+from indexer.custom.indexer import EntityGraph
 
 entity_graph = EntityGraph()
 entity_graph.build_graph()
