@@ -142,3 +142,4 @@ cython_debug/
 # Dataset
 output.*
 visited.txt
+*.csv
