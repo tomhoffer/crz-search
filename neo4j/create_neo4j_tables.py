@@ -3,8 +3,8 @@ from typing import Dict
 from indexer.model import Address
 from parser.contract_parser import ContractParser
 
-base_path = '/Users/tomashoffer/Documents/Coding-Projects/vinf/indexer/neo4j_data/'
-SOURCE_FILE = '/Users/tomashoffer/Documents/Coding-Projects/vinf/output.csv'
+base_path = '/indexer/neo4j_data/'
+SOURCE_FILE = '/output.csv'
 
 OUTPUT_COMPANIES = base_path + 'companies.csv'
 OUTPUT_STREETS = base_path + 'streets.csv'

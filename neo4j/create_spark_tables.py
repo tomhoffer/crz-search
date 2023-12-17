@@ -5,7 +5,7 @@ from indexer.model import EdgeType, Contract, Address
 from parser.contract_parser import ContractParser
 
 #SOURCE_FILE = '/Users/tomashoffer/Documents/Coding-Projects/vinf/output-mini.csv'
-SOURCE_FILE = '/Users/tomashoffer/Documents/Coding-Projects/vinf/output.csv'
+SOURCE_FILE = '/output.csv'
 OUTPUT_VERTICES = '/Users/tomashoffer/Documents/Coding-Projects/vinf/vertices.csv'
 OUTPUT_EDGES = '/Users/tomashoffer/Documents/Coding-Projects/vinf/edges.csv'
 
